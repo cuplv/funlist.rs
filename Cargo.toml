@@ -3,4 +3,5 @@ name = "funlist"
 version = "0.1.0"
 authors = ["Matthew Hammer <matthew.hammer@colorado.edu>"]
 
-[dependencies]
+[lib]
+name = "funlist"
