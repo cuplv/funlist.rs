@@ -25,13 +25,12 @@ pub fn push<T>(list: List<T>, item: T) -> List<T> {
 
 // fold : S list -> T -> (T -> S -> T) -> T
 
-pub fn fold<T,S,F>(list: &List<S>, accum:T, f:F) -> T
-  where F:Fn(T, &S) -> T {
+pub fn fold<'a, S, T, F>(list: &'a List<S>, accum: T, f: F) -> T
+  where F:Fn(T, &'a S) -> T {
     match *list {
       List::Nil => accum,
       List::Cons(ref cons) => {
-        let accum2 = f(accum, &cons.hd);
-        return fold(&*cons.tl, accum2, f)
+        fold(&*cons.tl, f(accum, &cons.hd), f)
       }
     }
 }
