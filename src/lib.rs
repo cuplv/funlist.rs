@@ -19,9 +19,15 @@ pub struct Iter<'a, T:'a> {
   next: Option<&'a Cons<T>>,
 }
 
-
 pub fn push<T>(list: List<T>, item: T) -> List<T> {
   List::Cons(Cons{hd: item, tl:Rc::new(list)})
+}
+
+pub fn pop<T>(list: List<T>) -> (Option<T>, Rc<List<T>>) {
+  match list {
+    List::Nil => (None, Rc::new(List::Nil)),
+    List::Cons(cons) => (Some(cons.hd), cons.tl),
+  }
 }
 
 
